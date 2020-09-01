@@ -1,10 +1,11 @@
 import React from "react";
+import StartScreen from "./components/StartScreen";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">Main App</header>
-    </div>
+    <main className="h-app">
+      <StartScreen />
+    </main>
   );
 }
 
