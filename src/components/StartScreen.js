@@ -88,6 +88,7 @@ const StartScreen = props => {
             variant="primary"
             disabled={!(selectedBilangan.length >= 2 && selectedType.length)}
             block
+            onClick={handleStart}
           >
             Mulai
           </Button>
