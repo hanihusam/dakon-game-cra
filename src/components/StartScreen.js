@@ -4,9 +4,15 @@ import styled from "styled-components";
 import { Modal, Row, Col, Container, Button } from "react-bootstrap";
 
 const StartScreen = props => {
-  const { getBilangan, getType, selectedType, selectedBilangan } = props;
+  const {
+    open,
+    getBilangan,
+    getType,
+    selectedType,
+    selectedBilangan,
+    handleStart
+  } = props;
 
-  const [startDialog, setStartDialog] = useState(true);
   const [number, setNumber] = useState([]);
 
   useEffect(() => {
@@ -18,16 +24,9 @@ const StartScreen = props => {
     // eslint-disable-next-line
   }, []);
 
-  const handleStart = () => setStartDialog(prevStatus => !prevStatus);
-
   return (
     <Fragment>
-      <Modal
-        show={startDialog}
-        onHide={handleStart}
-        backdrop="static"
-        centered={true}
-      >
+      <Modal show={open} onHide={handleStart} backdrop="static" centered={true}>
         <Modal.Body>
           <Container>
             <Modal.Title className="text-center">
@@ -154,6 +153,8 @@ const Bilangan = styled(SelectButton)`
 StartScreen.propTypes = {
   getBilangan: PropTypes.func,
   getType: PropTypes.func,
+  handleStart: PropTypes.func,
+  open: PropTypes.bool,
   selectedType: PropTypes.string,
   selectedBilangan: PropTypes.array
 };
