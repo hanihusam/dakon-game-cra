@@ -7,8 +7,7 @@
 html,
 body {
   font-family: "Rubik", sans-serif;
-  color: #2222;
-  background-color: #ffffff;
+  background-color: #f5f7fb;
   width: 100%;
   height: 100%;
   font-size: 14px;
@@ -57,4 +56,10 @@ p,
 label {
   font-size: 14px;
   color: #232323;
+}
+
+.h-app {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
 }
