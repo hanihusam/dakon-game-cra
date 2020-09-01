@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Modal, Row, Col, Container, Button } from "react-bootstrap";
 
 const StartScreen = props => {
-  const { getNumber, getType } = props;
+  const { getBilangan, getType, selectedType, selectedBilangan } = props;
 
   const [startDialog, setStartDialog] = useState(true);
   const [number, setNumber] = useState([]);
@@ -34,23 +34,61 @@ const StartScreen = props => {
               Silahkan pilih jenis soal
             </Modal.Title>
             <Row className="flex-column mt-3">
-              <TipeSoal>FPB</TipeSoal>
-              <TipeSoal>KPK</TipeSoal>
+              {["FPB", "KPK"].map((type, idx) => {
+                let selected = false;
+
+                if (selectedType === type) {
+                  selected = true;
+                }
+
+                return (
+                  <TipeSoal
+                    key={idx}
+                    selected={selected}
+                    onClick={() => getType(type)}
+                  >
+                    {type}
+                  </TipeSoal>
+                );
+              })}
             </Row>
             <Row className="text-center mt-3">
               <Col md="12" className="text-center">
                 <p>Pilih 2 bilangan sebagai acuan</p>
               </Col>
               <div className="number-board mx-auto">
-                {number.map(num => (
-                  <Bilangan key={num}>{num}</Bilangan>
-                ))}
+                {number.map(num => {
+                  let selected = false;
+
+                  if (selectedBilangan.includes(num)) {
+                    selected = true;
+                  }
+
+                  return (
+                    <Bilangan
+                      selected={selected}
+                      key={num}
+                      onClick={() => getBilangan(num)}
+                      disabled={
+                        !selectedBilangan.includes(num) &&
+                        selectedBilangan.length >= 2
+                      }
+                    >
+                      {num}
+                    </Bilangan>
+                  );
+                })}
               </div>
             </Row>
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button className="mx-auto" variant="primary" disabled block>
+          <Button
+            className="mx-auto"
+            variant="primary"
+            disabled={!(selectedBilangan.length >= 2 && selectedType.length)}
+            block
+          >
             Mulai
           </Button>
         </Modal.Footer>
@@ -59,38 +97,64 @@ const StartScreen = props => {
   );
 };
 
-const SelectButton = styled.button`
-  display: inline-block;
+const SelectButton = styled(Button)`
   margin: 10px;
-  font-weight: 400;
-  text-align: center;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border-radius: 10px;
-  border-color: #87431d;
+  border-color: #87431d !important;
   color: #87431d;
   background-color: transparent;
+  &:focus {
+    outline: 0;
+    color: #fff;
+    background-color: #87431d;
+  }
+  &:disabled {
+    &:hover {
+      color: #87431d;
+      background-color: initial;
+    }
+    color: #87431d;
+    background-color: transparent;
+    opacity: 0.65;
+  }
 `;
 
-const TipeSoal = styled(SelectButton)``;
+const TipeSoal = styled(SelectButton)`
+  ${props =>
+    props.selected && {
+      color: "#fff",
+      backgroundColor: "#87431d"
+    }}
+  &:focus {
+    outline: 0;
+    color: #fff;
+    background-color: #87431d;
+  }
+  &:hover {
+    color: #fff;
+    background-color: #87431d;
+  }
+`;
 
 const Bilangan = styled(SelectButton)`
   margin: 0 5px 5px 0;
   width: 40px;
+  ${props =>
+    props.selected && {
+      color: "#fff",
+      backgroundColor: "#87431d"
+    }}
+  &:hover {
+    color: #fff;
+    background-color: #87431d;
+  }
 `;
 
 StartScreen.propTypes = {
-  getNumber: PropTypes.func,
-  getType: PropTypes.func
+  getBilangan: PropTypes.func,
+  getType: PropTypes.func,
+  selectedType: PropTypes.string,
+  selectedBilangan: PropTypes.array
 };
 
 export default StartScreen;
