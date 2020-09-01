@@ -7,6 +7,29 @@
   min-height: 100vh;
 }
 
-#title > p {
-  font-size: 18px;
+#title {
+  > p {
+    font-size: 18px;
+  }
+}
+
+#game-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+  #board {
+    .number-board {
+      margin: 10px 20px;
+      width: 64px;
+      height: 64px;
+      display: inline-block;
+      .sub {
+        display: inline-block;
+        > i {
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
