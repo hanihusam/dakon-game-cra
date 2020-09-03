@@ -42,7 +42,10 @@ const MainScreen = () => {
           <p className="text-muted">Menggunakan Konsep FPB / KPK</p>
         </div>
         {!startDialog && (
-          <MainBoard tipe={tipeSoal} bilangan={bilangan.sort()} />
+          <MainBoard
+            tipe={tipeSoal}
+            bilangan={bilangan.sort((a, b) => a - b)}
+          />
         )}
       </Container>
     </main>
