@@ -25,7 +25,9 @@
       height: 64px;
       display: inline-block;
       .sub {
-        display: inline-block;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 5px;
         > i {
           font-size: 12px;
         }
