@@ -99,6 +99,7 @@ const StartScreen = props => {
 
 const SelectButton = styled(Button)`
   margin: 10px;
+  font-size: 14px;
   border-radius: 10px;
   border-color: #87431d !important;
   color: #87431d;
