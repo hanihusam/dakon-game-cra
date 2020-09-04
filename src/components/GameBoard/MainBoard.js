@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Button, Row } from "react-bootstrap";
+
 import NumberBoard from "./NumberBoard";
 
 const MainBoard = props => {
@@ -44,9 +47,9 @@ const MainBoard = props => {
   };
 
   return (
-    <div id="game-board">
+    <BoardArea>
       <h1 className="text-center">{`"Tentukan ${tipe} dari bilangan ${bilangan[0]} dan ${bilangan[1]}"`}</h1>
-      <div className="subtitle mx-auto">
+      <Subtitle>
         <p className="text-info">
           Tanda <i className="far fa-circle" /> untuk kelipatan bilangan{" "}
           {bilangan[0]}
@@ -56,8 +59,14 @@ const MainBoard = props => {
           Tanda <i className="far fa-star" /> untuk kelipatan bilangan{" "}
           {bilangan[1]}
         </p>
-      </div>
-      <div id="board" className="mt-5 text-center">
+      </Subtitle>
+      <ControlButton>
+        <Button variant="primary">Selesai</Button>
+        <Button variant="danger" className="mt-2">
+          Keluar
+        </Button>
+      </ControlButton>
+      <GameBoard>
         {daftarAngka.map(angka => (
           <NumberBoard
             getKelipatanPertama={getKelipatanPertama}
@@ -66,9 +75,38 @@ const MainBoard = props => {
             angka={angka}
           />
         ))}
-      </div>
-    </div>
+      </GameBoard>
+    </BoardArea>
   );
 };
+
+const BoardArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+`;
+
+const GameBoard = styled.div`
+  margin-top: 3rem;
+  text-align: center;
+`;
+
+const Subtitle = styled.div`
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  margin-right: auto;
+  margin-left: auto;
+`;
+
+const ControlButton = styled(Row)`
+  width: 50%;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+`;
 
 export default MainBoard;
