@@ -4,14 +4,22 @@ import styled from "styled-components";
 import { Button } from "react-bootstrap";
 
 const NumberBoard = props => {
-  const { angka, getKelipatanPertama, getKelipatanKedua } = props;
+  const {
+    angka,
+    selected,
+    getKelipatanPertama,
+    getKelipatanKedua,
+    getBothSelected
+  } = props;
 
   const [starSelected, setStarSelected] = useState(false);
   const [dotSelected, setDotSelected] = useState(false);
 
   return (
     <TheNumberBoard>
-      <Board>{angka}</Board>
+      <Board selected={selected} onClick={() => getBothSelected(angka)}>
+        {angka}
+      </Board>
       <div className="sub-board">
         <i
           className={`${starSelected ? "fas" : "far"} fa-star`}
@@ -38,15 +46,15 @@ const Board = styled(Button)`
   border-radius: 10px;
   border-color: #87431d !important;
   color: #dbcbbd;
-  background-color: #87431d;
+  background-color: ${props => (props.selected ? "#290001" : "#87431d")};
   &:hover {
     color: #dbcbbd;
     background-color: #290001;
   }
   &:focus {
     outline: 0;
-    color: #fff;
-    background-color: #87431d;
+    color: #dbcbbd;
+    background-color: ${props => (props.selected ? "#290001" : "#87431d")};
   }
   &:disabled {
     &:hover {

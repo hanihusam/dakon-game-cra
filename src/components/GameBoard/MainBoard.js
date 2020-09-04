@@ -10,6 +10,7 @@ const MainBoard = props => {
   const [daftarAngka, setDaftarAngka] = useState([]);
   const [kelipatanPertama, setKelipatanPertama] = useState([]);
   const [kelipatanKedua, setKelipatanKedua] = useState([]);
+  const [bothSelected, setBothSelected] = useState([]);
 
   useEffect(() => {
     let newAngka = [];
@@ -46,6 +47,19 @@ const MainBoard = props => {
     setKelipatanKedua(newBilangan);
   };
 
+  const getBothSelected = value => {
+    const position = bothSelected.indexOf(value);
+    let newBilangan = bothSelected.slice();
+
+    if (position !== -1) {
+      newBilangan.splice(position, 1);
+    } else {
+      newBilangan = [...bothSelected, value];
+    }
+
+    setBothSelected(newBilangan);
+  };
+
   return (
     <BoardArea>
       <h1 className="text-center">{`"Tentukan ${tipe} dari bilangan ${bilangan[0]} dan ${bilangan[1]}"`}</h1>
@@ -67,14 +81,23 @@ const MainBoard = props => {
         </Button>
       </ControlButton>
       <GameBoard>
-        {daftarAngka.map(angka => (
-          <NumberBoard
-            getKelipatanPertama={getKelipatanPertama}
-            getKelipatanKedua={getKelipatanKedua}
-            key={angka}
-            angka={angka}
-          />
-        ))}
+        {daftarAngka.map(angka => {
+          let selected = false;
+
+          if (bothSelected.includes(angka)) {
+            selected = true;
+          }
+          return (
+            <NumberBoard
+              getKelipatanPertama={getKelipatanPertama}
+              getKelipatanKedua={getKelipatanKedua}
+              getBothSelected={getBothSelected}
+              key={angka}
+              angka={angka}
+              selected={selected}
+            />
+          );
+        })}
       </GameBoard>
     </BoardArea>
   );
