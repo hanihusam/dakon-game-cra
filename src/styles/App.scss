@@ -12,32 +12,3 @@
     font-size: 18px;
   }
 }
-
-#game-board {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 40px;
-  #board {
-    .number-board {
-      margin: 10px 20px;
-      width: 64px;
-      height: 64px;
-      display: inline-block;
-      .sub {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 5px;
-        > i {
-          font-size: 12px;
-        }
-      }
-    }
-  }
-  .subtitle {
-    width: 50%;
-    height: auto;
-    display: flex;
-    justify-content: space-around;
-  }
-}
