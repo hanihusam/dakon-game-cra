@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
@@ -6,20 +6,29 @@ import { Button } from "react-bootstrap";
 const NumberBoard = props => {
   const { angka, getKelipatanPertama, getKelipatanKedua } = props;
 
+  const [starSelected, setStarSelected] = useState(false);
+  const [dotSelected, setDotSelected] = useState(false);
+
   return (
-    <div className="number-board">
+    <TheNumberBoard>
       <Board>{angka}</Board>
-      <div className="sub">
+      <div className="sub-board">
         <i
-          className="far fa-star"
-          onClick={() => getKelipatanPertama(angka)}
+          className={`${starSelected ? "fas" : "far"} fa-star`}
+          onClick={() => {
+            getKelipatanPertama(angka);
+            setStarSelected(prevStatus => !prevStatus);
+          }}
         ></i>
         <i
-          className="far fa-circle"
-          onClick={() => getKelipatanKedua(angka)}
+          className={`${dotSelected ? "fas" : "far"} fa-circle`}
+          onClick={() => {
+            getKelipatanKedua(angka);
+            setDotSelected(prevStatus => !prevStatus);
+          }}
         ></i>
       </div>
-    </div>
+    </TheNumberBoard>
   );
 };
 
@@ -47,6 +56,22 @@ const Board = styled(Button)`
     color: #87431d;
     background-color: transparent;
     opacity: 0.65;
+  }
+`;
+
+const TheNumberBoard = styled.div`
+  margin: 10px 20px;
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  .sub-board {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+    > i {
+      font-size: 12px;
+      cursor: pointer;
+    }
   }
 `;
 
