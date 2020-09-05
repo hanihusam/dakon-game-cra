@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Button, Row } from "react-bootstrap";
+import { formula } from "../../lib/formula";
+import { Button, Row, Col } from "react-bootstrap";
 
 import NumberBoard from "./NumberBoard";
 
@@ -8,9 +9,16 @@ const MainBoard = props => {
   const { tipe, bilangan } = props;
 
   const [daftarAngka, setDaftarAngka] = useState([]);
-  const [kelipatanPertama, setKelipatanPertama] = useState([]);
-  const [kelipatanKedua, setKelipatanKedua] = useState([]);
-  const [bothSelected, setBothSelected] = useState([]);
+  const [kelipatanPertama, setKelipatanPertama] = useState({
+    jawaban: [],
+    kunci: []
+  });
+  const [kelipatanKedua, setKelipatanKedua] = useState({
+    jawaban: [],
+    kunci: []
+  });
+  const [bothSelected, setBothSelected] = useState({ jawaban: [], kunci: [] });
+  const [nilaiHasil, setNilaiHasil] = useState({ jawaban: 0, kunci: 0 });
 
   useEffect(() => {
     let newAngka = [];
@@ -21,48 +29,107 @@ const MainBoard = props => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    getKunciKelipatan();
+    // eslint-disable-next-line
+  }, [daftarAngka]);
+
+  useEffect(() => {
+    if (kelipatanPertama.kunci.length > 0 && kelipatanKedua.kunci.length > 0) {
+      getKunciBothSelected();
+    }
+    // eslint-disable-next-line
+  }, [kelipatanPertama.kunci, kelipatanKedua.kunci]);
+
+  useEffect(() => {
+    if (bothSelected.kunci.length > 0) {
+      setNilaiHasil(prevState => ({ ...prevState, kunci: getHasil() }));
+    }
+    // eslint-disable-next-line
+  }, [bothSelected.kunci]);
+
   const getKelipatanPertama = value => {
-    const position = kelipatanPertama.indexOf(value);
-    let newBilangan = kelipatanPertama.slice();
+    const position = kelipatanPertama.jawaban.indexOf(value);
+    let newBilangan = kelipatanPertama.jawaban.slice();
 
     if (position !== -1) {
       newBilangan.splice(position, 1);
     } else {
-      newBilangan = [...kelipatanPertama, value];
+      newBilangan = [...kelipatanPertama.jawaban, value];
     }
 
-    setKelipatanPertama(newBilangan);
+    setKelipatanPertama({ ...kelipatanPertama, jawaban: newBilangan });
+  };
+
+  const getKunciKelipatan = () => {
+    let newBilanganPertama = [];
+    let newBilanganKedua = [];
+
+    if (daftarAngka.length > 1) {
+      for (let i = bilangan[0]; i <= daftarAngka.length; i++) {
+        if (i % bilangan[0] === 0) {
+          newBilanganPertama = [...newBilanganPertama, i];
+        }
+        if (i % bilangan[1] === 0) {
+          newBilanganKedua = [...newBilanganKedua, i];
+        }
+      }
+
+      setKelipatanPertama(prevState => ({
+        ...prevState,
+        kunci: newBilanganPertama
+      }));
+      setKelipatanKedua(prevState => ({
+        ...prevState,
+        kunci: newBilanganKedua
+      }));
+    }
   };
 
   const getKelipatanKedua = value => {
-    const position = kelipatanKedua.indexOf(value);
-    let newBilangan = kelipatanKedua.slice();
+    const position = kelipatanKedua.jawaban.indexOf(value);
+    let newBilangan = kelipatanKedua.jawaban.slice();
 
     if (position !== -1) {
       newBilangan.splice(position, 1);
     } else {
-      newBilangan = [...kelipatanKedua, value];
+      newBilangan = [...kelipatanKedua.jawaban, value];
     }
 
-    setKelipatanKedua(newBilangan);
+    setKelipatanKedua({ ...kelipatanKedua, jawaban: newBilangan });
   };
 
   const getBothSelected = value => {
-    const position = bothSelected.indexOf(value);
-    let newBilangan = bothSelected.slice();
+    const position = bothSelected.jawaban.indexOf(value);
+    let newBilangan = bothSelected.jawaban.slice();
 
     if (position !== -1) {
       newBilangan.splice(position, 1);
     } else {
-      newBilangan = [...bothSelected, value];
+      newBilangan = [...bothSelected.jawaban, value];
     }
 
-    setBothSelected(newBilangan);
+    setBothSelected({ ...bothSelected, jawaban: newBilangan });
+  };
+
+  const getKunciBothSelected = () => {
+    let newBilangan = kelipatanPertama.kunci.filter(bil =>
+      kelipatanKedua.kunci.includes(bil)
+    );
+
+    setBothSelected(prevState => ({ ...prevState, kunci: newBilangan }));
+  };
+
+  const getHasil = (bilangan = bothSelected.kunci) => {
+    const hasil = formula(bilangan, tipe);
+    return hasil;
   };
 
   return (
     <BoardArea>
-      <h1 className="text-center">{`"Tentukan ${tipe} dari bilangan ${bilangan[0]} dan ${bilangan[1]}"`}</h1>
+      <Col md="8" className="mx-auto">
+        <h1 className="text-center">{`"Tentukan ${tipe} dari pertemuan bilangan kelipatan ${bilangan[0]} dan ${bilangan[1]}"`}</h1>
+      </Col>
       <Subtitle>
         <p className="text-info">
           Tanda <i className="far fa-circle" /> untuk kelipatan bilangan{" "}
@@ -75,7 +142,17 @@ const MainBoard = props => {
         </p>
       </Subtitle>
       <ControlButton>
-        <Button variant="primary">Selesai</Button>
+        <Button
+          variant="primary"
+          onClick={() =>
+            setNilaiHasil(prevState => ({
+              ...prevState,
+              jawaban: getHasil(bothSelected.jawaban)
+            }))
+          }
+        >
+          Selesai
+        </Button>
         <Button variant="danger" className="mt-2">
           Keluar
         </Button>
@@ -84,7 +161,7 @@ const MainBoard = props => {
         {daftarAngka.map(angka => {
           let selected = false;
 
-          if (bothSelected.includes(angka)) {
+          if (bothSelected.jawaban.includes(angka)) {
             selected = true;
           }
           return (
