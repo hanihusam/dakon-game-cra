@@ -149,6 +149,19 @@ const Bilangan = styled(SelectButton)`
     color: #fff;
     background-color: #87431d;
   }
+  &:focus {
+    outline: 0;
+    ${props =>
+      props.selected
+        ? {
+            color: "#fff",
+            backgroundColor: "#87431d"
+          }
+        : {
+            color: "#87431d",
+            backgroundColor: "transparent"
+          }}
+  }
 `;
 
 StartScreen.propTypes = {
