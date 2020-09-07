@@ -11,11 +11,11 @@ const MainBoard = ({ tipe, bilangan }) => {
   const [won, setWon] = useState(false);
   const [resultOpen, setResultOpen] = useState(false);
   const [daftarAngka, setDaftarAngka] = useState([]);
-  const [kelipatanPertama, setKelipatanPertama] = useState({
+  const [faktorPertama, setFaktorPertama] = useState({
     jawaban: [],
     kunci: []
   });
-  const [kelipatanKedua, setKelipatanKedua] = useState({
+  const [faktorKedua, setFaktorKedua] = useState({
     jawaban: [],
     kunci: []
   });
@@ -37,16 +37,16 @@ const MainBoard = ({ tipe, bilangan }) => {
   }, []);
 
   useEffect(() => {
-    getKunciKelipatan();
+    getKunciFaktor();
     // eslint-disable-next-line
   }, [daftarAngka]);
 
   useEffect(() => {
-    if (kelipatanPertama.kunci.length > 0 && kelipatanKedua.kunci.length > 0) {
+    if (faktorPertama.kunci.length > 0 && faktorKedua.kunci.length > 0) {
       getKunciBothSelected();
     }
     // eslint-disable-next-line
-  }, [kelipatanPertama.kunci, kelipatanKedua.kunci]);
+  }, [faktorPertama.kunci, faktorKedua.kunci]);
 
   useEffect(() => {
     if (bothSelected.kunci.length > 0) {
@@ -55,20 +55,20 @@ const MainBoard = ({ tipe, bilangan }) => {
     // eslint-disable-next-line
   }, [bothSelected.kunci]);
 
-  const getKelipatanPertama = value => {
-    const position = kelipatanPertama.jawaban.indexOf(value);
-    let newBilangan = kelipatanPertama.jawaban.slice();
+  const getFaktorPertama = value => {
+    const position = faktorPertama.jawaban.indexOf(value);
+    let newBilangan = faktorPertama.jawaban.slice();
 
     if (position !== -1) {
       newBilangan.splice(position, 1);
     } else {
-      newBilangan = [...kelipatanPertama.jawaban, value];
+      newBilangan = [...faktorPertama.jawaban, value];
     }
 
-    setKelipatanPertama({ ...kelipatanPertama, jawaban: newBilangan });
+    setFaktorPertama({ ...faktorPertama, jawaban: newBilangan });
   };
 
-  const getKunciKelipatan = () => {
+  const getKunciFaktor = () => {
     let newBilanganPertama = [];
     let newBilanganKedua = [];
 
@@ -82,28 +82,28 @@ const MainBoard = ({ tipe, bilangan }) => {
         }
       }
 
-      setKelipatanPertama(prevState => ({
+      setFaktorPertama(prevState => ({
         ...prevState,
         kunci: newBilanganPertama
       }));
-      setKelipatanKedua(prevState => ({
+      setFaktorKedua(prevState => ({
         ...prevState,
         kunci: newBilanganKedua
       }));
     }
   };
 
-  const getKelipatanKedua = value => {
-    const position = kelipatanKedua.jawaban.indexOf(value);
-    let newBilangan = kelipatanKedua.jawaban.slice();
+  const getFaktorKedua = value => {
+    const position = faktorKedua.jawaban.indexOf(value);
+    let newBilangan = faktorKedua.jawaban.slice();
 
     if (position !== -1) {
       newBilangan.splice(position, 1);
     } else {
-      newBilangan = [...kelipatanKedua.jawaban, value];
+      newBilangan = [...faktorKedua.jawaban, value];
     }
 
-    setKelipatanKedua({ ...kelipatanKedua, jawaban: newBilangan });
+    setFaktorKedua({ ...faktorKedua, jawaban: newBilangan });
   };
 
   const getBothSelected = value => {
@@ -120,8 +120,8 @@ const MainBoard = ({ tipe, bilangan }) => {
   };
 
   const getKunciBothSelected = () => {
-    let newBilangan = kelipatanPertama.kunci.filter(bil =>
-      kelipatanKedua.kunci.includes(bil)
+    let newBilangan = faktorPertama.kunci.filter(bil =>
+      faktorKedua.kunci.includes(bil)
     );
 
     setBothSelected(prevState => ({ ...prevState, kunci: newBilangan }));
@@ -164,16 +164,16 @@ const MainBoard = ({ tipe, bilangan }) => {
     <>
       <BoardArea>
         <Col md="8" className="mx-auto">
-          <h1 className="text-center">{`"Tentukan ${tipe} dari pertemuan bilangan kelipatan ${bilangan[0]} dan ${bilangan[1]}"`}</h1>
+          <h1 className="text-center">{`"Tentukan ${tipe} dari pertemuan bilangan faktor dari ${bilangan[0]} dan ${bilangan[1]}"`}</h1>
         </Col>
         <Subtitle>
           <p className="text-info">
-            Tanda <i className="far fa-circle" /> untuk kelipatan bilangan{" "}
+            Tanda <i className="far fa-circle" /> untuk faktor bilangan{" "}
             {bilangan[0]}
           </p>
           <span>|</span>
           <p className="text-info">
-            Tanda <i className="far fa-star" /> untuk kelipatan bilangan{" "}
+            Tanda <i className="far fa-star" /> untuk faktor bilangan{" "}
             {bilangan[1]}
           </p>
         </Subtitle>
@@ -198,8 +198,8 @@ const MainBoard = ({ tipe, bilangan }) => {
             }
             return (
               <NumberBoard
-                getKelipatanPertama={getKelipatanPertama}
-                getKelipatanKedua={getKelipatanKedua}
+                getFaktorPertama={getFaktorPertama}
+                getFaktorKedua={getFaktorKedua}
                 getBothSelected={getBothSelected}
                 key={angka}
                 angka={angka}
@@ -244,7 +244,7 @@ const Subtitle = styled.div`
   width: 50%;
   height: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-right: auto;
   margin-left: auto;
 `;
