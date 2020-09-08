@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { formula } from "../../lib/formula";
 import { Button, Row, Col } from "react-bootstrap";
 
 import NumberBoard from "./NumberBoard";
 import ConfirmationDialog from "../ConfirmationDialog";
 import ResultDialog from "../ResultDialog";
+
+const arrayEquals = (arrA, arrB) => {
+  return (
+    Array.isArray(arrA) &&
+    Array.isArray(arrB) &&
+    arrA.length === arrB.length &&
+    arrA.every((val, index) => val === arrB[index])
+  );
+};
 
 const MainBoard = ({ tipe, bilangan }) => {
   const [won, setWon] = useState(false);
@@ -21,7 +29,7 @@ const MainBoard = ({ tipe, bilangan }) => {
   });
   const [nilaiFPB, setNilaiFPB] = useState(null);
   const [nilaiKPK, setNilaiKPK] = useState(null);
-  const [nilaiHasil, setNilaiHasil] = useState(0);
+  const [nilaiHasil, setNilaiHasil] = useState(null);
   const [openDialog, setOpenDialog] = useState({
     show: false,
     text: "",
@@ -44,7 +52,9 @@ const MainBoard = ({ tipe, bilangan }) => {
 
   useEffect(() => {
     if (faktorPertama.kunci.length > 0 && faktorKedua.kunci.length > 0) {
-      getKunciFPB();
+      if (tipe === "FPB") {
+        getKunciFPB();
+      } else getKunciKPK();
     }
     // eslint-disable-next-line
   }, [faktorPertama.kunci, faktorKedua.kunci]);
@@ -103,38 +113,29 @@ const MainBoard = ({ tipe, bilangan }) => {
   };
 
   const getJawaban = value => {
-    setNilaiHasil(value);
+    if (nilaiHasil === value) {
+      setNilaiHasil(null);
+    } else setNilaiHasil(value);
   };
 
   const getKunciFPB = () => {
     let newBilangan = faktorPertama.kunci.filter(bil =>
       faktorKedua.kunci.includes(bil)
     );
-
     let nilai =
       newBilangan.length === 0 ? 0 : Math.max.apply(Math, newBilangan);
 
     setNilaiFPB(nilai);
   };
 
-  // const getHasil = (bilangan = bothSelected.kunci) => {
-  //   const hasil = formula(bilangan, tipe);
-  //   return hasil;
-  // };
+  const getKunciKPK = () => {
+    let newBilangan = [...faktorPertama.kunci, ...faktorKedua.kunci];
+    let nilai = Math.max.apply(Math, newBilangan);
+
+    setNilaiKPK(nilai);
+  };
 
   const onFinishGame = () => {
-    if (nilaiFPB) {
-      setNilaiHasil(prevState => ({
-        ...prevState,
-        jawaban: nilaiFPB
-      }));
-    } else {
-      setNilaiHasil(prevState => ({
-        ...prevState,
-        jawaban: nilaiKPK
-      }));
-    }
-
     setOpenDialog(prevState => ({
       show: !prevState.show,
       text: "Apakah Anda sudah yakin dengan jawaban Anda?",
@@ -151,9 +152,15 @@ const MainBoard = ({ tipe, bilangan }) => {
   };
 
   const getWonStatus = () => {
-    const { jawaban, kunci } = nilaiHasil;
-    if (jawaban === kunci) {
-      setWon(prevState => !prevState);
+    if (
+      arrayEquals(faktorPertama.kunci, faktorPertama.jawaban) &&
+      arrayEquals(faktorKedua.kunci, faktorKedua.jawaban)
+    ) {
+      if (tipe === "FPB") {
+        if (nilaiHasil === nilaiFPB) setWon(true);
+      } else {
+        if (nilaiHasil === nilaiKPK) setWon(true);
+      }
     }
   };
 
@@ -178,7 +185,7 @@ const MainBoard = ({ tipe, bilangan }) => {
           <Button
             variant="primary"
             onClick={onFinishGame}
-            disabled={!nilaiFPB || !nilaiKPK}
+            disabled={!nilaiHasil}
           >
             Selesai
           </Button>

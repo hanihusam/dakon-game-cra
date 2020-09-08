@@ -7,9 +7,9 @@ const NumberBoard = props => {
   const {
     angka,
     selected,
-    getKelipatanPertama,
-    getKelipatanKedua,
-    getBothSelected
+    getFaktorPertama,
+    getFaktorKedua,
+    getJawaban
   } = props;
 
   const [starSelected, setStarSelected] = useState(false);
@@ -17,22 +17,22 @@ const NumberBoard = props => {
 
   return (
     <TheNumberBoard>
-      <Board selected={selected} onClick={() => getBothSelected(angka)}>
+      <Board selected={selected} onClick={() => getJawaban(angka)}>
         {angka}
       </Board>
       <div className="sub-board">
         <i
-          className={`${starSelected ? "fas" : "far"} fa-star`}
+          className={`${dotSelected ? "fas" : "far"} fa-circle`}
           onClick={() => {
-            getKelipatanPertama(angka);
-            setStarSelected(prevStatus => !prevStatus);
+            getFaktorPertama(angka);
+            setDotSelected(prevStatus => !prevStatus);
           }}
         ></i>
         <i
-          className={`${dotSelected ? "fas" : "far"} fa-circle`}
+          className={`${starSelected ? "fas" : "far"} fa-star`}
           onClick={() => {
-            getKelipatanKedua(angka);
-            setDotSelected(prevStatus => !prevStatus);
+            getFaktorKedua(angka);
+            setStarSelected(prevStatus => !prevStatus);
           }}
         ></i>
       </div>
@@ -85,8 +85,8 @@ const TheNumberBoard = styled.div`
 
 NumberBoard.propTypes = {
   angka: PropTypes.number,
-  getKelipatanPertama: PropTypes.func,
-  getKelipatanKedua: PropTypes.func
+  getFaktorPertama: PropTypes.func,
+  getFaktorKedua: PropTypes.func
 };
 
 export default NumberBoard;
