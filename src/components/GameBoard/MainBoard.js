@@ -19,8 +19,9 @@ const MainBoard = ({ tipe, bilangan }) => {
     jawaban: [],
     kunci: []
   });
-  const [bothSelected, setBothSelected] = useState({ jawaban: [], kunci: [] });
-  const [nilaiHasil, setNilaiHasil] = useState({ jawaban: 0, kunci: 0 });
+  const [nilaiFPB, setNilaiFPB] = useState(null);
+  const [nilaiKPK, setNilaiKPK] = useState(null);
+  const [nilaiHasil, setNilaiHasil] = useState(0);
   const [openDialog, setOpenDialog] = useState({
     show: false,
     text: "",
@@ -29,7 +30,7 @@ const MainBoard = ({ tipe, bilangan }) => {
 
   useEffect(() => {
     let newAngka = [];
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 0; i <= 100; i++) {
       newAngka = [...newAngka, i];
     }
     setDaftarAngka(newAngka);
@@ -43,17 +44,10 @@ const MainBoard = ({ tipe, bilangan }) => {
 
   useEffect(() => {
     if (faktorPertama.kunci.length > 0 && faktorKedua.kunci.length > 0) {
-      getKunciBothSelected();
+      getKunciFPB();
     }
     // eslint-disable-next-line
   }, [faktorPertama.kunci, faktorKedua.kunci]);
-
-  useEffect(() => {
-    if (bothSelected.kunci.length > 0) {
-      setNilaiHasil(prevState => ({ ...prevState, kunci: getHasil() }));
-    }
-    // eslint-disable-next-line
-  }, [bothSelected.kunci]);
 
   const getFaktorPertama = value => {
     const position = faktorPertama.jawaban.indexOf(value);
@@ -73,11 +67,13 @@ const MainBoard = ({ tipe, bilangan }) => {
     let newBilanganKedua = [];
 
     if (daftarAngka.length > 1) {
-      for (let i = 1; i <= daftarAngka.length; i++) {
-        if (i % bilangan[0] === 0 || bilangan[0] % i === 0) {
+      for (let i = 2; i <= bilangan[0]; i++) {
+        if (bilangan[0] % i === 0) {
           newBilanganPertama = [...newBilanganPertama, i];
         }
-        if (i % bilangan[1] === 0 || bilangan[1] % i === 0) {
+      }
+      for (let i = 2; i <= bilangan[1]; i++) {
+        if (bilangan[1] % i === 0) {
           newBilanganKedua = [...newBilanganKedua, i];
         }
       }
@@ -106,37 +102,38 @@ const MainBoard = ({ tipe, bilangan }) => {
     setFaktorKedua({ ...faktorKedua, jawaban: newBilangan });
   };
 
-  const getBothSelected = value => {
-    const position = bothSelected.jawaban.indexOf(value);
-    let newBilangan = bothSelected.jawaban.slice();
-
-    if (position !== -1) {
-      newBilangan.splice(position, 1);
-    } else {
-      newBilangan = [...bothSelected.jawaban, value];
-    }
-
-    setBothSelected({ ...bothSelected, jawaban: newBilangan });
+  const getJawaban = value => {
+    setNilaiHasil(value);
   };
 
-  const getKunciBothSelected = () => {
+  const getKunciFPB = () => {
     let newBilangan = faktorPertama.kunci.filter(bil =>
       faktorKedua.kunci.includes(bil)
     );
 
-    setBothSelected(prevState => ({ ...prevState, kunci: newBilangan }));
+    let nilai =
+      newBilangan.length === 0 ? 0 : Math.max.apply(Math, newBilangan);
+
+    setNilaiFPB(nilai);
   };
 
-  const getHasil = (bilangan = bothSelected.kunci) => {
-    const hasil = formula(bilangan, tipe);
-    return hasil;
-  };
+  // const getHasil = (bilangan = bothSelected.kunci) => {
+  //   const hasil = formula(bilangan, tipe);
+  //   return hasil;
+  // };
 
   const onFinishGame = () => {
-    setNilaiHasil(prevState => ({
-      ...prevState,
-      jawaban: getHasil(bothSelected.jawaban)
-    }));
+    if (nilaiFPB) {
+      setNilaiHasil(prevState => ({
+        ...prevState,
+        jawaban: nilaiFPB
+      }));
+    } else {
+      setNilaiHasil(prevState => ({
+        ...prevState,
+        jawaban: nilaiKPK
+      }));
+    }
 
     setOpenDialog(prevState => ({
       show: !prevState.show,
@@ -181,7 +178,7 @@ const MainBoard = ({ tipe, bilangan }) => {
           <Button
             variant="primary"
             onClick={onFinishGame}
-            disabled={bothSelected.jawaban.length === 0}
+            disabled={!nilaiFPB || !nilaiKPK}
           >
             Selesai
           </Button>
@@ -193,14 +190,14 @@ const MainBoard = ({ tipe, bilangan }) => {
           {daftarAngka.map(angka => {
             let selected = false;
 
-            if (bothSelected.jawaban.includes(angka)) {
+            if (nilaiHasil === angka) {
               selected = true;
             }
             return (
               <NumberBoard
                 getFaktorPertama={getFaktorPertama}
                 getFaktorKedua={getFaktorKedua}
-                getBothSelected={getBothSelected}
+                getJawaban={getJawaban}
                 key={angka}
                 angka={angka}
                 selected={selected}

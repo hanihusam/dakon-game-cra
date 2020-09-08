@@ -17,7 +17,7 @@ const StartScreen = props => {
 
   useEffect(() => {
     let newNum = [];
-    for (let i = 1; i <= 50; i++) {
+    for (let i = 1; i <= 20; i++) {
       newNum = [...newNum, i];
     }
     setNumber(newNum);
