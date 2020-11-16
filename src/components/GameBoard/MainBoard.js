@@ -257,7 +257,6 @@ const Subtitle = styled.div`
 `;
 
 const ControlButton = styled(Row)`
-  width: 50%;
   margin-top: 2rem;
   margin-bottom: 2rem;
   margin-left: auto;
