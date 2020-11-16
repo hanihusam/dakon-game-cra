@@ -56,7 +56,7 @@ const StartScreen = props => {
                 <p>Pilih 2 bilangan sebagai acuan</p>
               </Col>
               <div className="number-board mx-auto">
-                {number.map((num, idx) => {
+                {number.map((num) => {
                   let selected = false;
 
                   if (selectedBilangan.includes(num)) {
@@ -64,10 +64,9 @@ const StartScreen = props => {
                   }
 
                   return (
-                    <>
+                    <Fragment key={num}>
                       <Bilangan
                         selected={selected}
-                        key={num}
                         onClick={() => getBilangan(num)}
                         disabled={
                           !selectedBilangan.includes(num) &&
@@ -77,7 +76,7 @@ const StartScreen = props => {
                         {num}
                       </Bilangan>
                       {(num - 1) % 7 === 0 && <br />}
-                    </>
+                    </Fragment>
                   );
                 })}
               </div>
