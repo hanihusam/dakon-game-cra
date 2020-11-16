@@ -21,20 +21,20 @@ const NumberBoard = props => {
         {angka}
       </Board>
       <div className="sub-board">
-        <i
-          className={`${dotSelected ? "fas" : "far"} fa-circle`}
+        <TriangleUp
+          selected={dotSelected}
           onClick={() => {
             getFaktorPertama(angka);
             setDotSelected(prevStatus => !prevStatus);
           }}
-        ></i>
-        <i
-          className={`${starSelected ? "fas" : "far"} fa-star`}
+        />
+        <Diamond
+          selected={starSelected}
           onClick={() => {
             getFaktorKedua(angka);
             setStarSelected(prevStatus => !prevStatus);
           }}
-        ></i>
+        />
       </div>
     </TheNumberBoard>
   );
@@ -82,6 +82,34 @@ const TheNumberBoard = styled.div`
     }
   }
 `;
+
+export const TriangleUp = styled.i`
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid ${props => props.selected ? 'coral' : 'orange'};
+`
+
+export const Diamond = styled.i`
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-bottom-color: ${props => props.selected ? 'coral' : 'orange'};
+  position: relative;
+  top: -9px;
+
+  ::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: ${props => props.selected ? 'coral' : 'orange'};
+  }
+`
 
 NumberBoard.propTypes = {
   angka: PropTypes.number,
