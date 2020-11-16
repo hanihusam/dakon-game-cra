@@ -17,7 +17,7 @@ const StartScreen = props => {
 
   useEffect(() => {
     let newNum = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 2; i <= 50; i++) {
       newNum = [...newNum, i];
     }
     setNumber(newNum);
@@ -56,7 +56,7 @@ const StartScreen = props => {
                 <p>Pilih 2 bilangan sebagai acuan</p>
               </Col>
               <div className="number-board mx-auto">
-                {number.map(num => {
+                {number.map((num, idx) => {
                   let selected = false;
 
                   if (selectedBilangan.includes(num)) {
@@ -64,17 +64,20 @@ const StartScreen = props => {
                   }
 
                   return (
-                    <Bilangan
-                      selected={selected}
-                      key={num}
-                      onClick={() => getBilangan(num)}
-                      disabled={
-                        !selectedBilangan.includes(num) &&
-                        selectedBilangan.length >= 2
-                      }
-                    >
-                      {num}
-                    </Bilangan>
+                    <>
+                      <Bilangan
+                        selected={selected}
+                        key={num}
+                        onClick={() => getBilangan(num)}
+                        disabled={
+                          !selectedBilangan.includes(num) &&
+                          selectedBilangan.length >= 2
+                        }
+                      >
+                        {num}
+                      </Bilangan>
+                      {(num - 1) % 7 === 0 && <br />}
+                    </>
                   );
                 })}
               </div>
@@ -152,15 +155,15 @@ const Bilangan = styled(SelectButton)`
   &:focus {
     outline: 0;
     ${props =>
-      props.selected
-        ? {
-            color: "#fff",
-            backgroundColor: "#87431d"
-          }
-        : {
-            color: "#87431d",
-            backgroundColor: "transparent"
-          }}
+    props.selected
+      ? {
+        color: "#fff",
+        backgroundColor: "#87431d"
+      }
+      : {
+        color: "#87431d",
+        backgroundColor: "transparent"
+      }}
   }
 `;
 
