@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Button, Row, Col } from "react-bootstrap";
 
-import NumberBoard from "./NumberBoard";
+import NumberBoard, { Diamond, TriangleUp } from "./NumberBoard";
 import ConfirmationDialog from "../ConfirmationDialog";
 import ResultDialog from "../ResultDialog";
 
@@ -38,7 +38,7 @@ const MainBoard = ({ tipe, bilangan }) => {
 
   useEffect(() => {
     let newAngka = [];
-    for (let i = 0; i <= 100; i++) {
+    for (let i = 1; i <= 100; i++) {
       newAngka = [...newAngka, i];
     }
     setDaftarAngka(newAngka);
@@ -172,27 +172,15 @@ const MainBoard = ({ tipe, bilangan }) => {
         </Col>
         <Subtitle>
           <p className="text-info">
-            Tanda <i className="far fa-circle" /> untuk faktor bilangan{" "}
+            Tanda segitiga untuk faktor bilangan{" "}
             {bilangan[0]}
           </p>
           <span>|</span>
           <p className="text-info">
-            Tanda <i className="far fa-star" /> untuk faktor bilangan{" "}
+            Tanda belah ketupat untuk faktor bilangan{" "}
             {bilangan[1]}
           </p>
         </Subtitle>
-        <ControlButton>
-          <Button
-            variant="primary"
-            onClick={onFinishGame}
-            disabled={!nilaiHasil}
-          >
-            Selesai
-          </Button>
-          <Button variant="danger" className="mt-2" onClick={onEndGame}>
-            Keluar
-          </Button>
-        </ControlButton>
         <GameBoard>
           {daftarAngka.map(angka => {
             let selected = false;
@@ -212,6 +200,21 @@ const MainBoard = ({ tipe, bilangan }) => {
             );
           })}
         </GameBoard>
+        <ControlButton>
+          <Col className="text-right">
+            <Button
+              className='mr-2'
+              variant="primary"
+              onClick={onFinishGame}
+              disabled={!nilaiHasil}
+            >
+              Selesai
+          </Button>
+            <Button variant="danger" onClick={onEndGame}>
+              Keluar
+          </Button>
+          </Col>
+        </ControlButton>
       </BoardArea>
       <ConfirmationDialog
         show={openDialog.show}
@@ -256,9 +259,8 @@ const Subtitle = styled.div`
 const ControlButton = styled(Row)`
   width: 50%;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   margin-left: auto;
-  margin-right: auto;
-  flex-direction: column;
 `;
 
 export default MainBoard;
