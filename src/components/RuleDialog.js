@@ -7,6 +7,7 @@ const RuleDialog = (props) => {
 
   return (
     <Modal show={open} onHide={handleStart} centered={true}>
+      <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <Container>
           <Modal.Title className="text-center">
