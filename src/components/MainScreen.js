@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 import StartScreen from "./StartScreen";
 import MainBoard from "./GameBoard/MainBoard";
+import RuleDialog from "./RuleDialog";
 
 const MainScreen = () => {
   const [tipeSoal, setTipeSoal] = useState("");
   const [bilangan, setBilangan] = useState([]);
-  const [startDialog, setStartDialog] = useState(true);
+  const [startDialog, setStartDialog] = useState(false);
+  const [ruleDialog, setRuleDialog] = useState(true);
 
   const getType = value => setTipeSoal(value);
 
@@ -24,7 +26,13 @@ const MainScreen = () => {
     setBilangan(newBilangan);
   };
 
-  const handleStart = () => setStartDialog(prevStatus => !prevStatus);
+  const handleStart = () => setStartDialog(null);
+  const handleRule = () => {
+    setRuleDialog(prevStatus => !prevStatus);
+    if (startDialog !== null) {
+      setStartDialog(prevStatus => !prevStatus)
+    }
+  }
 
   return (
     <main className="h-app">
@@ -40,13 +48,17 @@ const MainScreen = () => {
         <div id="title" className="text-center">
           <div className="display-4">Game Pamusi</div>
         </div>
-        {!startDialog && (
+        {/* <div className="text-left">
+          <Button size='sm' variant='warning' onClick={() => setRuleDialog(prevStatus => !prevStatus)}>Peraturan</Button>
+        </div> */}
+        {!ruleDialog && !startDialog && (
           <MainBoard
             tipe={tipeSoal}
             bilangan={bilangan.sort((a, b) => a - b)}
           />
         )}
       </Container>
+      <RuleDialog open={ruleDialog} handleStart={handleRule} />
     </main>
   );
 };
