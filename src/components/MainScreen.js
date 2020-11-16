@@ -38,8 +38,7 @@ const MainScreen = () => {
           selectedBilangan={bilangan}
         />
         <div id="title" className="text-center">
-          <div className="display-4">Game Dakon</div>
-          <p className="text-muted">Menggunakan Konsep FPB / KPK</p>
+          <div className="display-4">Game Pamusi</div>
         </div>
         {!startDialog && (
           <MainBoard
