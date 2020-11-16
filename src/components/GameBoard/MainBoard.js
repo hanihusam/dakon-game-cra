@@ -168,7 +168,7 @@ const MainBoard = ({ tipe, bilangan }) => {
     <>
       <BoardArea>
         <Col md="8" className="mx-auto">
-          <h1 className="text-center">{`"Tentukan ${tipe} dari pertemuan bilangan faktor dari ${bilangan[0]} dan ${bilangan[1]}"`}</h1>
+          <h1 className="text-center">{`Tentukan ${tipe} dari pertemuan bilangan faktor dari ${bilangan[0]} dan ${bilangan[1]}`}</h1>
         </Col>
         <Subtitle>
           <p className="text-info">
