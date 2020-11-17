@@ -27,9 +27,9 @@ const StartScreen = props => {
   return (
     <Fragment>
       <Modal show={open} onHide={handleStart} backdrop="static" centered={true}>
-        <Modal.Body>
+        <Modal.Body style={{ backgroundColor: '#00778B' }}>
           <Container>
-            <Modal.Title className="text-center">
+            <Modal.Title className="text-center text-white">
               Silahkan pilih jenis soal
             </Modal.Title>
             <Row className="flex-column mt-3">
@@ -52,8 +52,8 @@ const StartScreen = props => {
               })}
             </Row>
             <Row className="text-center mt-3">
-              <Col md="12" className="text-center">
-                <p>Pilih 2 bilangan sebagai acuan</p>
+              <Col md="12" className="text-center text-white">
+                <p className="text-white">Pilih 2 bilangan sebagai acuan</p>
               </Col>
               <div className="number-board mx-auto">
                 {number.map((num) => {
@@ -103,21 +103,21 @@ const SelectButton = styled(Button)`
   margin: 10px;
   font-size: 14px;
   border-radius: 10px;
-  border-color: #87431d !important;
-  color: #87431d;
-  background-color: transparent;
+  border-color: #67D2DF !important;
+  color: #00778B;
+  background-color: #67D2DF;
   &:focus {
     outline: 0;
-    color: #fff;
-    background-color: #87431d;
+    color: #00778B;
+    background-color: navy;
   }
   &:disabled {
     &:hover {
-      color: #87431d;
-      background-color: initial;
+      color: #00778B;
+      background-color: #67D2DF;
     }
-    color: #87431d;
-    background-color: transparent;
+    color: #00778B;
+    background-color: #67D2DF;
     opacity: 0.65;
   }
 `;
@@ -126,16 +126,16 @@ const TipeSoal = styled(SelectButton)`
   ${props =>
     props.selected && {
       color: "#fff",
-      backgroundColor: "#87431d"
+      backgroundColor: "navy"
     }}
   &:focus {
     outline: 0;
     color: #fff;
-    background-color: #87431d;
+    background-color: navy;
   }
   &:hover {
     color: #fff;
-    background-color: #87431d;
+    background-color: navy;
   }
 `;
 
@@ -145,11 +145,11 @@ const Bilangan = styled(SelectButton)`
   ${props =>
     props.selected && {
       color: "#fff",
-      backgroundColor: "#87431d"
+      backgroundColor: "navy"
     }}
   &:hover {
     color: #fff;
-    background-color: #87431d;
+    background-color: navy;
   }
   &:focus {
     outline: 0;
@@ -157,10 +157,10 @@ const Bilangan = styled(SelectButton)`
     props.selected
       ? {
         color: "#fff",
-        backgroundColor: "#87431d"
+        backgroundColor: "navy"
       }
       : {
-        color: "#87431d",
+        color: "navy",
         backgroundColor: "transparent"
       }}
   }

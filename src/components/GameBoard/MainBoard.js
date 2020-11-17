@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Button, Row, Col } from "react-bootstrap";
 
-import NumberBoard, { Diamond, TriangleUp } from "./NumberBoard";
+import NumberBoard from "./NumberBoard";
 import ConfirmationDialog from "../ConfirmationDialog";
 import ResultDialog from "../ResultDialog";
 

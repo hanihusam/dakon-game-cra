@@ -45,15 +45,15 @@ const Board = styled(Button)`
   height: 4em;
   border-radius: 10px;
   border-color: #87431d !important;
-  color: #dbcbbd;
+  color: #FDAA63;
   background-color: ${props => (props.selected ? "#290001" : "#87431d")};
   &:hover {
-    color: #dbcbbd;
+    color: #FDAA63;
     background-color: #290001;
   }
   &:focus {
     outline: 0;
-    color: #dbcbbd;
+    color: #FDAA63;
     background-color: ${props => (props.selected ? "#290001" : "#87431d")};
   }
   &:disabled {

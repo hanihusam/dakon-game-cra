@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Modal, Button, Card } from "react-bootstrap";
 
-import WinImg from "../img/win.svg";
-import LoseImg from "../img/lose.svg";
+import WinImg from "../img/win.png";
+import LoseImg from "../img/lose.png";
 
 const ResultDialog = ({ win, show, handleClose }) => {
   const onRefreshPage = () => {
@@ -12,7 +12,7 @@ const ResultDialog = ({ win, show, handleClose }) => {
 
   return (
     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-      <Modal.Body>
+      <Modal.Body style={{ backgroundColor: '#F1EB9C' }}>
         <Card.Img variant="top" src={win ? WinImg : LoseImg} className="my-3" />
         <Card.Body className="text-center">
           <h1 className="text-uppercase">{win ? "BENAR" : "SALAH"}</h1>
