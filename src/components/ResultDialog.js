@@ -20,7 +20,7 @@ const ResultDialog = ({ win, show, handleClose }) => {
       </Modal.Body>
       <Modal.Footer style={{ backgroundColor: '#F1EB9C' }}>
         <Button variant="restart" block onClick={onRefreshPage}>
-          Lanjut ke Soal Berikutnya
+          {win ? 'Lanjut ke Soal Berikutnya' : 'Mulai Main Lagi'}
         </Button>
       </Modal.Footer>
     </Modal>

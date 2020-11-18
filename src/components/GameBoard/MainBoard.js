@@ -171,12 +171,12 @@ const MainBoard = ({ tipe, bilangan }) => {
           <h1 className="text-center">{`Tentukan ${tipe} dari pertemuan bilangan faktor dari ${bilangan[0]} dan ${bilangan[1]}`}</h1>
         </Col>
         <Subtitle>
-          <p style={{ fontSize: '16px', color: '#F56600' }}>
+          <p style={{ fontSize: '20px', color: '#F56600' }}>
             Tanda segitiga untuk faktor bilangan{" "}
             {bilangan[0]}
           </p>
           <span>|</span>
-          <p style={{ fontSize: '16px', color: '#F56600' }}>
+          <p style={{ fontSize: '20px', color: '#F56600' }}>
             Tanda belah ketupat untuk faktor bilangan{" "}
             {bilangan[1]}
           </p>
@@ -248,7 +248,7 @@ const GameBoard = styled.div`
 `;
 
 const Subtitle = styled.div`
-  width: 60%;
+  width: 80%;
   height: auto;
   display: flex;
   justify-content: space-between;

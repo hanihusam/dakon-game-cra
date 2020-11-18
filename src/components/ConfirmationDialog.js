@@ -15,7 +15,7 @@ const ConfirmationDialog = ({
 
   return (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton></Modal.Header>
+      <Modal.Header closeButton style={{ backgroundColor: '#CCCCE3' }}></Modal.Header>
       <Modal.Body style={{ backgroundColor: '#9EA1DB' }}>{text}</Modal.Body>
       <Modal.Footer style={{ backgroundColor: '#CCCCE3' }}>
         <Button variant="secondary" onClick={handleClose}>
