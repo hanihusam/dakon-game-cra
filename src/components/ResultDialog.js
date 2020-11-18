@@ -18,9 +18,9 @@ const ResultDialog = ({ win, show, handleClose }) => {
           <h1 className="text-uppercase">{win ? "BENAR" : "SALAH"}</h1>
         </Card.Body>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" block onClick={onRefreshPage}>
-          Mulai Main Lagi
+      <Modal.Footer style={{ backgroundColor: '#F1EB9C' }}>
+        <Button variant="restart" block onClick={onRefreshPage}>
+          Lanjut ke Soal Berikutnya
         </Button>
       </Modal.Footer>
     </Modal>

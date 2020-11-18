@@ -171,12 +171,12 @@ const MainBoard = ({ tipe, bilangan }) => {
           <h1 className="text-center">{`Tentukan ${tipe} dari pertemuan bilangan faktor dari ${bilangan[0]} dan ${bilangan[1]}`}</h1>
         </Col>
         <Subtitle>
-          <p className="text-info">
+          <p style={{ fontSize: '16px', color: '#F56600' }}>
             Tanda segitiga untuk faktor bilangan{" "}
             {bilangan[0]}
           </p>
           <span>|</span>
-          <p className="text-info">
+          <p style={{ fontSize: '16px', color: '#F56600' }}>
             Tanda belah ketupat untuk faktor bilangan{" "}
             {bilangan[1]}
           </p>
@@ -204,13 +204,13 @@ const MainBoard = ({ tipe, bilangan }) => {
           <Col className="text-right">
             <Button
               className='mr-2'
-              variant="primary"
+              variant="restart"
               onClick={onFinishGame}
               disabled={!nilaiHasil}
             >
               Selesai
           </Button>
-            <Button variant="danger" onClick={onEndGame}>
+            <Button variant="exit" onClick={onEndGame}>
               Keluar
           </Button>
           </Col>
@@ -248,7 +248,7 @@ const GameBoard = styled.div`
 `;
 
 const Subtitle = styled.div`
-  width: 50%;
+  width: 60%;
   height: auto;
   display: flex;
   justify-content: space-between;

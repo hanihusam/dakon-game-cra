@@ -7,8 +7,8 @@ const RuleDialog = (props) => {
 
   return (
     <Modal show={open} onHide={handleStart} centered={true} >
-      <Modal.Header style={{ color: '#E0EC89', backgroundColor: '#00AD50' }} closeButton></Modal.Header>
-      <Modal.Body style={{ color: '#E0EC89', backgroundColor: '#00AD50' }}>
+      <Modal.Header style={{ color: '#D9ED9E', backgroundColor: '#00B052' }} closeButton></Modal.Header>
+      <Modal.Body style={{ color: '#D9ED9E', backgroundColor: '#00B052' }}>
         <Container>
           <Modal.Title className="text-center">
             Game Pamusi
@@ -18,12 +18,12 @@ const RuleDialog = (props) => {
           </Modal.Title>
           <Row className='mt-5'>
             <Col>
-              <p style={{ color: '#E0EC89' }}>Baca aturan bermain  sebelum melakukan permainan.</p>
+              <p style={{ color: '#D9ED9E' }}>Baca aturan bermain  sebelum melakukan permainan.</p>
             </Col>
           </Row>
           <Row>
             <Col md='12'>
-              <p style={{ color: '#E0EC89' }}>Berikut adalah aturan bermain PAMUSI,</p>
+              <p style={{ color: '#D9ED9E' }}>Berikut adalah aturan bermain PAMUSI,</p>
             </Col>
             <Col md='12'>
               <ol start='1'>

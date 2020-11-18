@@ -46,7 +46,7 @@ const MainScreen = () => {
           selectedBilangan={bilangan}
         />
         <div id="title" className="text-center">
-          <div className="display-4">Game Pamusi</div>
+          <div className="display-4" style={{ color: '#EB2629', fontWeight: 700 }}>Game Pamusi</div>
         </div>
         {/* <div className="text-left">
           <Button size='sm' variant='warning' onClick={() => setRuleDialog(prevStatus => !prevStatus)}>Peraturan</Button>

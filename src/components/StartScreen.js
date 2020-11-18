@@ -83,10 +83,10 @@ const StartScreen = props => {
             </Row>
           </Container>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={{ backgroundColor: '#00778B' }}>
           <Button
             className="mx-auto"
-            variant="primary"
+            variant="start"
             disabled={!(selectedBilangan.length >= 2 && selectedType.length)}
             block
             onClick={handleStart}
