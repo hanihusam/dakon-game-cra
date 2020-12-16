@@ -19,7 +19,7 @@ const ResultDialog = ({ win, show, handleClose }) => {
         </Card.Body>
       </Modal.Body>
       <Modal.Footer style={{ backgroundColor: '#F1EB9C' }}>
-        <Button variant="restart" block onClick={onRefreshPage}>
+        <Button className="text-white" variant="restart" block onClick={onRefreshPage}>
           {win ? 'Lanjut ke Soal Berikutnya' : 'Mulai Main Lagi'}
         </Button>
       </Modal.Footer>

@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Modal, Row, Col, Container, } from "react-bootstrap";
 
 const RuleDialog = (props) => {
@@ -10,10 +11,10 @@ const RuleDialog = (props) => {
       <Modal.Header style={{ color: '#D9ED9E', backgroundColor: '#00B052' }} closeButton></Modal.Header>
       <Modal.Body style={{ color: '#D9ED9E', backgroundColor: '#00B052' }}>
         <Container>
-          <Modal.Title className="text-center">
+          <Modal.Title className="text-center" style={{color: '#EB2629'}}>
             Game Pamusi
             </Modal.Title>
-          <Modal.Title className="text-center" >
+          <Modal.Title className="text-center" style={{color: '#EB2629'}}>
             Papan Multi Fungsi FPB dan KPK
           </Modal.Title>
           <Row className='mt-5'>
@@ -23,18 +24,49 @@ const RuleDialog = (props) => {
           </Row>
           <Row>
             <Col md='12'>
-              <p style={{ color: '#D9ED9E' }}>Berikut adalah aturan bermain PAMUSI,</p>
+              <p style={{ color: '#D9ED9E' }}>Baca aturan bermain sebelum melakukan permainan PAMUSI dibawah ini,</p>
             </Col>
             <Col md='12'>
-              <ol start='1'>
-                <li>1. Pilih konsep FPB atau KPK.</li>
-                <li>2. Pilih angka yang akan dicari faktor bilangannya.</li>
-                <li>3. Tekan tombol mulai</li>
-                <li>4. Tentukan faktor bilangan dari angka yang telah dipilih sebelumnya, dengan klik tanda di bawah angka sesuai dengan faktor bilangan dari angka yang dipilih.</li>
-                <li>5. Pilih dari angka yang termasuk faktor bilangan untuk menentukan FPB atau KPK.</li>
-                <li>6. Tekan tombol selesai </li>
-                <li>7. Apabila pemain berhasil dapat melanjutkan ke soal berikutnya, apabila  pemain salah mengulang kembali.</li>
-              </ol>
+              <Table>
+                <tbody>
+                  <tr>
+                    <td>1.</td>
+                    <td>Pilih konsep FPB atau KPK.</td>
+                  </tr>
+                  <tr>
+                    <td>2.</td>
+                    <td>Pilih angka yang akan dicari faktor bilangannya.</td>
+                  </tr>
+                  <tr>
+                    <td>3.</td>
+                    <td>Tekan tombol mulai.</td>
+                  </tr>
+                  <tr>
+                    <td>4.</td>
+                    <td>Klik tanda dibawah angka, segitiga dan belah ketupat sesuai dengan faktor bilangannya</td>
+                  </tr>
+                  <tr>
+                    <td>5.</td>
+                    <td>Pilih dari angka yang termasuk faktor bilangan untuk menentukan FPB atau KPK.</td>
+                  </tr>
+                  <tr>
+                    <td>6.</td>
+                    <td>Jika telah menemukan angka FPB atau KPK, klik tombol selesai.</td>
+                  </tr>
+                  <tr>
+                    <td>7.</td>
+                    <td>Jika jawaban kalian benar, boleh melanjutkan pada soal berikutnya, dan jika jawaban salah ulangilah kembali.</td>
+                  </tr>
+                  <tr>
+                    <td>8.</td>
+                    <td>Jika kalian telah selesai membaca petunjuk permainan, klik tombol silang (X) di pojok kanan atas.</td>
+                  </tr>
+                  <tr>
+                    <td>9.</td>
+                    <td>Silahkan mainkan.</td>
+                  </tr>
+                </tbody>
+              </Table>
             </Col>
           </Row>
         </Container>
@@ -43,5 +75,11 @@ const RuleDialog = (props) => {
 
   )
 }
+
+const Table = styled.table`
+  td {
+    vertical-align: top;
+  }
+`
 
 export default RuleDialog
