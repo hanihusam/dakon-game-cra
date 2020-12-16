@@ -45,16 +45,16 @@ const Board = styled(Button)`
   height: 4em;
   border-radius: 10px;
   border-color: #FA873D !important;
-  color: #fff;
-  background-color: ${props => (props.selected ? 'rgb(203, 84, 0)' : "#FA873D")};
+  color: ${props => (props.selected ? '#000' : "#fff")};
+  background-color: ${props => (props.selected ? '#FFFF00' : "#FA873D")};
   &:hover {
-    color: #fff;
-    background-color: rgb(203, 84, 0);
+    color: #000;
+    background-color: #FFFF00;
   }
   &:focus {
     outline: 0;
-    color: #fff;
-    background-color: ${props => (props.selected ? 'rgb(203, 84, 0)' : "#FA873D")};
+    color: ${props => (props.selected ? '#000' : "#fff")};
+    background-color: ${props => (props.selected ? '#FFFF00' : "#FA873D")};
   }
   &:disabled {
     &:hover {
@@ -88,14 +88,14 @@ export const TriangleUp = styled.i`
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 20px solid ${props => props.selected ? 'rgb(203, 84, 0)' : '#F56600'};
+  border-bottom: 20px solid ${props => props.selected ? '#FFFF00' : '#F56600'};
 `
 
 export const Diamond = styled.i`
   width: 0;
   height: 0;
   border: 10px solid transparent;
-  border-bottom-color: ${props => props.selected ? 'rgb(203, 84, 0)' : '#F56600'};
+  border-bottom-color: ${props => props.selected ? '#FFFF00' : '#F56600'};
   position: relative;
   top: -9px;
 
@@ -107,7 +107,7 @@ export const Diamond = styled.i`
     width: 0;
     height: 0;
     border: 10px solid transparent;
-    border-top-color: ${props => props.selected ? 'rgb(203, 84, 0)' : '#F56600'};
+    border-top-color: ${props => props.selected ? '#FFFF00' : '#F56600'};
   }
 `
 
