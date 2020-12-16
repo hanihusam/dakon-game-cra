@@ -168,7 +168,7 @@ const MainBoard = ({ tipe, bilangan }) => {
     <>
       <BoardArea>
         <Col md="8" className="mx-auto">
-          <h1 className="text-center">{`Tentukan ${tipe} dari pertemuan bilangan faktor dari ${bilangan[0]} dan ${bilangan[1]}`}</h1>
+          <h1 className="text-center">{`Tentukan ${tipe} dari ${bilangan[0]} dan ${bilangan[1]}`}</h1>
         </Col>
         <Subtitle>
           <p style={{ fontSize: '20px', color: '#F56600' }}>
@@ -203,14 +203,14 @@ const MainBoard = ({ tipe, bilangan }) => {
         <ControlButton>
           <Col className="text-right">
             <Button
-              className='mr-2'
+              className='mr-2 text-white'
               variant="restart"
               onClick={onFinishGame}
               disabled={!nilaiHasil}
             >
               Selesai
           </Button>
-            <Button variant="exit" onClick={onEndGame}>
+            <Button className="text-white" variant="exit" onClick={onEndGame}>
               Keluar
           </Button>
           </Col>
