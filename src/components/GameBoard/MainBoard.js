@@ -5,6 +5,7 @@ import { Button, Row, Col } from "react-bootstrap";
 import NumberBoard from "./NumberBoard";
 import ConfirmationDialog from "../ConfirmationDialog";
 import ResultDialog from "../ResultDialog";
+import { formula } from "../../lib/formula";
 
 const arrayEquals = (arrA, arrB) => {
   return (
@@ -130,7 +131,7 @@ const MainBoard = ({ tipe, bilangan }) => {
 
   const getKunciKPK = () => {
     let newBilangan = [...faktorPertama.kunci, ...faktorKedua.kunci];
-    let nilai = Math.max.apply(Math, newBilangan);
+    let nilai = formula(newBilangan, "KPK");
 
     setNilaiKPK(nilai);
   };
