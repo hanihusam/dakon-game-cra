@@ -17,11 +17,6 @@ const RuleDialog = (props) => {
           <Modal.Title className="text-center" style={{color: '#EB2629'}}>
             Papan Multi Fungsi FPB dan KPK
           </Modal.Title>
-          <Row className='mt-5'>
-            <Col>
-              <p style={{ color: '#D9ED9E' }}>Baca aturan bermain  sebelum melakukan permainan.</p>
-            </Col>
-          </Row>
           <Row>
             <Col md='12'>
               <p style={{ color: '#D9ED9E' }}>Baca aturan bermain sebelum melakukan permainan PAMUSI dibawah ini,</p>
@@ -43,7 +38,7 @@ const RuleDialog = (props) => {
                   </tr>
                   <tr>
                     <td>4.</td>
-                    <td>Klik tanda dibawah angka, segitiga dan belah ketupat sesuai dengan faktor bilangannya</td>
+                    <td>Klik tanda di bawah angka, segitiga dan belah ketupat sesuai dengan faktor bilangannya.<br/>Contoh FPB dari 2 dan 4 maka klik ikon segitiga untuk faktor 2 dan klik ikon belah ketupat untuk faktor 4 lalu pilih angka yang merupakan hasil FPB.</td>
                   </tr>
                   <tr>
                     <td>5.</td>
