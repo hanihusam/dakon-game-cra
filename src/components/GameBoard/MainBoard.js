@@ -78,12 +78,12 @@ const MainBoard = ({ tipe, bilangan }) => {
     let newBilanganKedua = [];
 
     if (daftarAngka.length > 1) {
-      for (let i = 2; i <= bilangan[0]; i++) {
+      for (let i = 1; i <= bilangan[0]; i++) {
         if (bilangan[0] % i === 0) {
           newBilanganPertama = [...newBilanganPertama, i];
         }
       }
-      for (let i = 2; i <= bilangan[1]; i++) {
+      for (let i = 1; i <= bilangan[1]; i++) {
         if (bilangan[1] % i === 0) {
           newBilanganKedua = [...newBilanganKedua, i];
         }
